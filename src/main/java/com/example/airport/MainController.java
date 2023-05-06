@@ -12,8 +12,11 @@ import java.util.Map;
 
 @Controller
 public class MainController {
-    @Autowired
-    private ClientInfoRepo clientRepo;
+    private final ClientInfoRepo clientRepo;
+
+    public MainController(ClientInfoRepo clientRepo) {
+        this.clientRepo = clientRepo;
+    }
     @GetMapping("/greeting")
     public String greeting(
             @RequestParam(name="name", required=false, defaultValue="World") String name,
