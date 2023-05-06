@@ -1,9 +1,15 @@
 package com.example.airport.domain;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class BoughtTicket {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ticketId")
     private Ticket ticket;
     private String passportId;
     private String credentials;
