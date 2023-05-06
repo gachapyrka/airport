@@ -1,8 +1,21 @@
 package com.example.airport.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class Ticket {
+    @Id
+
+
+
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Account account;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "clientId")
+    private ClientInfo clientInfo;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "raiseId")
     private Raise raise;
     private int Count;
 
@@ -13,8 +26,8 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Account account, Raise raise, int count) {
-        this.account = account;
+    public Ticket(ClientInfo clientInfo, Raise raise, int count) {
+        this.clientInfo = clientInfo;
         this.raise = raise;
         Count = count;
     }
@@ -23,12 +36,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public Account getAccount() {
-        return account;
+    public ClientInfo getAccount() {
+        return clientInfo;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAccount(ClientInfo clientInfo) {
+        this.clientInfo = clientInfo;
     }
 
     public Raise getRaise() {

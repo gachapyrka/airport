@@ -1,10 +1,17 @@
 package com.example.airport.domain;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Entity
 public class Raise {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "placeFromId")
     private Place from;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "placeToId")
     private Place to;
     private Date date;
     private String number;
