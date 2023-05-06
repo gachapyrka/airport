@@ -1,4 +1,4 @@
-package com.example.airport;
+package com.example.airport.controllers;
 
 import com.example.airport.domain.ClientInfo;
 import com.example.airport.domain.Role;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @Controller
@@ -29,7 +30,9 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Map<String, Object> model) {
-        model.put("some", "hello, letsCode!");
+        //clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>()));
+        Iterable<ClientInfo> users = clientRepo.findAll();
+        model.put("users", users);
         return "main";
     }
 }
