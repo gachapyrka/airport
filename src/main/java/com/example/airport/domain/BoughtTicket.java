@@ -1,15 +1,20 @@
 package com.example.airport.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "bought_ticket")
 public class BoughtTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "ticketId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Ticket ticket;
     private String passportId;
     private String credentials;

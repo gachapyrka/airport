@@ -1,25 +1,28 @@
 package com.example.airport.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name="place")
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String coordinates;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn
+    private List<Raise> raises;
 
     public Place() {
     }
 
-    public Place(String name, String coordinates) {
+    public Place(String name, String coordinates, List<Raise> raises) {
         this.name = name;
         this.coordinates = coordinates;
+        this.raises = raises;
     }
 
     public Long getId() {
@@ -44,5 +47,13 @@ public class Place {
 
     public void setCoordinates(String coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public List<Raise> getRaises() {
+        return raises;
+    }
+
+    public void setRaises(List<Raise> raises) {
+        this.raises = raises;
     }
 }
