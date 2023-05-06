@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "client_info")
-public class ClientInfo {
+public class ClientInfo implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -85,5 +85,30 @@ public class ClientInfo {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isActive();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(getRole());
     }
 }

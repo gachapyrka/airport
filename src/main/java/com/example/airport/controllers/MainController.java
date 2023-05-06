@@ -4,6 +4,7 @@ import com.example.airport.domain.ClientInfo;
 import com.example.airport.domain.Role;
 import com.example.airport.repos.ClientInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,12 +28,12 @@ public class MainController {
         model.put("users", users);
         return "greeting";
     }
-
     @GetMapping("/")
-    public String main(Map<String, Object> model) {
+    public String main(@AuthenticationPrincipal ClientInfo user, Map<String, Object> model) {
         //clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>()));
         Iterable<ClientInfo> users = clientRepo.findAll();
         model.put("users", users);
+        model.put("isAuthorized", user!=null);
         return "main";
     }
 }

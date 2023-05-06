@@ -24,6 +24,7 @@ public class Raise {
     private Date date;
     private String number;
     private Double cost;
+    private Integer countOfDays;
 
     @OneToMany(mappedBy = "raise", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ticket> tickets;
@@ -31,12 +32,13 @@ public class Raise {
     public Raise() {
     }
 
-    public Raise(Place from, Place to, Date date, String number, Double cost, List<Ticket> tickets) {
+    public Raise(Place from, Place to, Date date, String number, Double cost, Integer countOfDays, List<Ticket> tickets) {
         this.from = from;
         this.to = to;
         this.date = date;
         this.number = number;
         this.cost = cost;
+        this.countOfDays = countOfDays;
         this.tickets = tickets;
     }
 
@@ -94,5 +96,13 @@ public class Raise {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Integer getCountOfDays() {
+        return countOfDays;
+    }
+
+    public void setCountOfDays(Integer countOfDays) {
+        this.countOfDays = countOfDays;
     }
 }
