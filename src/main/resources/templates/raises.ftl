@@ -37,6 +37,12 @@
                                 <input type="submit" value="Подробнее">
                             </form>
                         </#if>
+                        <#if known&&!isAdmin>
+                            <form method="post" action="/add-to-list/${raise.id}">
+                                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                                <input type="submit" value="В корзину">
+                            </form>
+                        </#if>
                     </td>
                 </tr>
             </#list>
