@@ -27,16 +27,20 @@ public class ClientInfo implements UserDetails{
     @OneToMany(mappedBy = "clientInfo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
+    @OneToMany(mappedBy = "clientInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Comment> comments;
+
     public ClientInfo() {
         active=true;
     }
 
-    public ClientInfo(String username, String password, Role role, boolean active, List<Ticket> tickets) {
+    public ClientInfo(String username, String password, Role role, boolean active, List<Ticket> tickets, List<Comment> comments) {
         this.username = username;
         this.password = password;
         this.role = role;
         this.active = active;
         this.tickets = tickets;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -85,6 +89,14 @@ public class ClientInfo implements UserDetails{
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
