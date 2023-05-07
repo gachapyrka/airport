@@ -8,14 +8,30 @@
             <thead>
             <th>Логин</th>
             <th>Роль</th>
-            <th></th>
+            <th>Статус</th>
             </thead>
         </table>
         <tbody>
         <#list usrs as usr>
             <tr>
                 <td>${usr.username}</td>
-                <td>${usr.role.name()}</td>
+                <td>
+                    <#if usr.isAdmin()>
+                        Администратор
+                    <#else>
+                        Пользователь
+                    </#if>
+                </td>
+                <td>
+                    <form method="post" action="/users/${usr.id}">
+                        <#if usr.active>
+                            <input type="submit" value="Активен">
+                        <#else>
+                            <input type="submit" value="Заблокирован">
+                        </#if>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                    </form>
+                </td>
             </tr>
         </#list>
         </tbody>

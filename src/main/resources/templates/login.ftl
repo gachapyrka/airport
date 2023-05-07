@@ -4,7 +4,7 @@
 
 <@c.page>
     <@k.page_default>
-        Вход
+        <h4>Авторизация</h4>
         <@l.login "/login" />
         <a href="/registration">Регистрация</a>
     </@k.page_default>

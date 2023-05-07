@@ -22,7 +22,7 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Map<String, Object> model) {
-        //clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>(), new ArrayList<>()));
+        //clientRepo.save(new ClientInfo("admin@admin.com", "admin", Role.ADMIN, true, new ArrayList<>(), new ArrayList<>()));
         return "main";
     }
 }

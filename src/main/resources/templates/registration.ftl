@@ -4,8 +4,8 @@
 
 <@c.page>
     <@k.page_default>
-        Регистрация
-        {$message?ifExists}
+        <h4>Регистрация</h4>
+        <h3>${message?ifExists}</h3>
         <@l.login "/registration" />
     </@k.page_default>
 </@c.page>
