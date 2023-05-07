@@ -5,6 +5,7 @@ import com.example.airport.domain.Comment;
 import com.example.airport.repos.CommentRepo;
 import com.example.airport.repos.RaiseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ public class CommentsController {
     }
 
     @GetMapping("/add")
+    @PreAuthorize("hasAuthority('USER')")
     public String getAddComments(Model model){
         return "add-comment";
     }
