@@ -1,6 +1,8 @@
 package com.example.airport.controllers;
 
+import com.example.airport.domain.ClientInfo;
 import com.example.airport.domain.Place;
+import com.example.airport.domain.Role;
 import com.example.airport.repos.ClientInfoRepo;
 import com.example.airport.repos.PlaceRepo;
 import org.springframework.stereotype.Controller;

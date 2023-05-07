@@ -51,14 +51,14 @@ public class RaisesController {
     @PreAuthorize("hasAuthority('USER')")
     public String addToList(@PathVariable Raise raise, @AuthenticationPrincipal ClientInfo user, Map<String, Object> model) {
         boolean isAlreadyAdded = false;
-        for(Ticket ticket: user.getTickets()){
-            if(ticket.getRaise().getId() == raise.getId()){
-                ticket.setCount(ticket.getCount()+1);
-                ticketRepo.save(ticket);
-                isAlreadyAdded=true;
-                break;
+            for(Ticket ticket: ticketRepo.findAllByClientInfo_Id(user.getId())){
+                if(ticket.getRaise().getId() == raise.getId() && ticket.getBoughtTicket()==null){
+                    ticket.setCount(ticket.getCount()+1);
+                    ticketRepo.save(ticket);
+                    isAlreadyAdded=true;
+                    break;
+                }
             }
-        }
         if(!isAlreadyAdded)
             ticketRepo.save(new Ticket(user, raise, null, 1));
 
