@@ -99,6 +99,8 @@ public class ClientInfo implements UserDetails{
         this.comments = comments;
     }
 
+    public boolean isAdmin() {return role == Role.ADMIN;}
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

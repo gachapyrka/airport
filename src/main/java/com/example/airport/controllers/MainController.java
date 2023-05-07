@@ -21,11 +21,8 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String main(@AuthenticationPrincipal ClientInfo user, Map<String, Object> model) {
-        clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>(), new ArrayList<>()));
-        Iterable<ClientInfo> users = clientRepo.findAll();
-        model.put("users", users);
-        model.put("isAuthorized", user!=null);
+    public String main(Map<String, Object> model) {
+        //clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>(), new ArrayList<>()));
         return "main";
     }
 }

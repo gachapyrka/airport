@@ -27,6 +27,7 @@ public class RaisesController {
 
         Iterable<Raise> raises = raiseRepo.findAll();
         model.put("raises", raises);
+
         return "raises";
     }
 
@@ -34,6 +35,7 @@ public class RaisesController {
     public String getTours(Map<String, Object> model) {
         Iterable<Raise> raises = raiseRepo.findAll();
         model.put("raises", raises);
+
         return "raises";
     }
 

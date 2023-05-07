@@ -5,7 +5,7 @@
 <@c.page>
     <@k.page_default>
         Регистрация
-        {$message}
+        {$message?ifExists}
         <@l.login "/registration" />
     </@k.page_default>
 </@c.page>
