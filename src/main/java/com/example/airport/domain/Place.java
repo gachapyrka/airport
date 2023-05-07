@@ -12,7 +12,7 @@ public class Place {
     private Long id;
     private String name;
     private String coordinates;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private List<Raise> raises;
 
