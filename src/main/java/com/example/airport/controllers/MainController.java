@@ -19,18 +19,10 @@ public class MainController {
     public MainController(ClientInfoRepo clientRepo) {
         this.clientRepo = clientRepo;
     }
-    @GetMapping("/greeting")
-    public String greeting(
-            @RequestParam(name="name", required=false, defaultValue="World") String name,
-            Map<String, Object> model
-    ) {
-        Iterable<ClientInfo> users = clientRepo.findAll();
-        model.put("users", users);
-        return "greeting";
-    }
+
     @GetMapping("/")
     public String main(@AuthenticationPrincipal ClientInfo user, Map<String, Object> model) {
-        //clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>()));
+        clientRepo.save(new ClientInfo("admin", "admin", Role.ADMIN, true, new ArrayList<>(), new ArrayList<>()));
         Iterable<ClientInfo> users = clientRepo.findAll();
         model.put("users", users);
         model.put("isAuthorized", user!=null);
