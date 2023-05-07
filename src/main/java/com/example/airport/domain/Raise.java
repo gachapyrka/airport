@@ -14,10 +14,6 @@ public class Raise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    @JoinColumn(name = "placeFromId", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    private Place from;
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "placeToId", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Place to;
@@ -32,8 +28,7 @@ public class Raise {
     public Raise() {
     }
 
-    public Raise(Place from, Place to, Date date, String number, Double cost, Integer countOfDays, List<Ticket> tickets) {
-        this.from = from;
+    public Raise(Place to, Date date, String number, Double cost, Integer countOfDays, List<Ticket> tickets) {
         this.to = to;
         this.date = date;
         this.number = number;
@@ -48,14 +43,6 @@ public class Raise {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Place getFrom() {
-        return from;
-    }
-
-    public void setFrom(Place from) {
-        this.from = from;
     }
 
     public Place getTo() {
