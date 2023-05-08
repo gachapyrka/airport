@@ -16,7 +16,7 @@ public class Comment {
     @NotBlank(message = "Текст не может быть пустым")
     private String text;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "clientId")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private ClientInfo clientInfo;
@@ -49,6 +49,12 @@ public class Comment {
     }
     public ClientInfo getClientInfo() {
         return clientInfo;
+    }
+
+    public String getClientName(){
+        if(clientInfo!=null)
+            return clientInfo.getUsername();
+        return "Удаленный пользователь";
     }
 
     public void setClientInfo(ClientInfo clientInfo) {
