@@ -12,7 +12,7 @@
         <#list comments as comment>
             <br style="border: grey; border-width: 3px; min-height: 15px; margin-top: 10px">
                 <div>
-                    <h5>${comment.clientInfo.username}:</h5>
+                    <h5>${comment.getClientName()}:</h5>
                     <p/>
                     ${comment.text}
                     <p style="align-self: flex-end">${comment.creationDate}</p>
