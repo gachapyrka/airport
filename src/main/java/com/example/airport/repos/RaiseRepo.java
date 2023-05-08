@@ -4,7 +4,9 @@ import com.example.airport.domain.ClientInfo;
 import com.example.airport.domain.Raise;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
+
 public interface RaiseRepo extends CrudRepository<Raise, Long> {
-    Iterable<Raise> findByCountOfDays(int countOfDays);
-    Iterable<Raise> findByCountOfDaysGreaterThan(int countOfDays);
+    List<Raise> findByCountOfDays(int countOfDays);
+    List<Raise> findByCountOfDaysGreaterThan(int countOfDays);
 }

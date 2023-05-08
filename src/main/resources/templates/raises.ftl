@@ -7,10 +7,24 @@
         <#if known&&isAdmin>
             <#if springMacroRequestContext.requestUri?contains("/raises")>
                 <a href="/add-raise">Добавить</a>
+
             <#else>
                 <a href="/add-tour">Добавить</a>
-            </#if>
 
+            </#if>
+        </#if>
+        <#if springMacroRequestContext.requestUri?contains("/raises")>
+            <p>Поиск:</p>
+            <form method="get" action="/raises">
+                <input type="text" name="filter" value="${filter}">
+                <button type="submit">Найти</button>
+            </form>
+        <#else>
+            <p>Поиск:</p>
+            <form method="get" action="/tours">
+                <input type="text" name="filter" value="${filter}">
+                <button type="submit">Найти</button>
+            </form>
         </#if>
         <table>
             <thead>

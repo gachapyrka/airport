@@ -15,7 +15,7 @@
                         <li><a href="/statistics">Статистика</a></li>
                     <#else>
                         <li><a href="/tickets">Корзина</a></li>
-                        <li><a href="/bought-tickets">История покупок</a></li>
+                        <li><a href="/history">История покупок</a></li>
                     </#if>
                     <li><a href="/comments">Отзывы</a></li>
                     <li><@l.logout></@l.logout></li>

@@ -17,6 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -31,18 +32,48 @@ public class RaisesController {
     }
 
     @GetMapping("/raises")
-    public String getRaises(Map<String, Object> model) {
+    public String getRaises(@RequestParam(required = false, defaultValue = "") String filter,Map<String, Object> model) {
 
-        Iterable<Raise> raises = raiseRepo.findByCountOfDays(0);
-        model.put("raises", raises);
+        List<Raise> raises = raiseRepo.findByCountOfDays(0);
+
+        List<Raise> rais = new ArrayList<>();
+        for(Raise r: raises){
+            boolean isFiltered = true;
+
+            if(filter!=null && !filter.isEmpty())
+            {
+                isFiltered = r.getTo().getName().contains(filter);
+            }
+
+            if(isFiltered)
+                rais.add(r);
+        }
+
+        model.put("raises", rais);
+        model.put("filter", filter);
 
         return "raises";
     }
 
     @GetMapping("/tours")
-    public String getTours(Map<String, Object> model) {
-        Iterable<Raise> raises = raiseRepo.findByCountOfDaysGreaterThan(0);
-        model.put("raises", raises);
+    public String getTours(@RequestParam(required = false, defaultValue = "") String filter, Map<String, Object> model) {
+        List<Raise> raises = raiseRepo.findByCountOfDaysGreaterThan(0);
+
+        List<Raise> rais = new ArrayList<>();
+        for(Raise r: raises){
+            boolean isFiltered = true;
+
+            if(filter!=null && !filter.isEmpty())
+            {
+                isFiltered = r.getTo().getName().contains(filter);
+            }
+
+            if(isFiltered)
+                rais.add(r);
+        }
+
+        model.put("raises", rais);
+        model.put("filter", filter);
 
         return "raises";
     }
