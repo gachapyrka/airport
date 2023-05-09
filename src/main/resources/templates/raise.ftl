@@ -16,6 +16,6 @@
         <#else>
             <a href="/raises">Назад</a>
         </#if>
-
+        <iframe src="${raise.to.coordinates}" width="640" height="480"></iframe>
     </@k.page_default>
 </@c.page>

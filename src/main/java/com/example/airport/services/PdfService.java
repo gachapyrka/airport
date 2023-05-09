@@ -54,15 +54,18 @@ public class PdfService {
         return "";
     }
 
-    public void createText(String content, Long id){
+    public String createText(String content, Long id){
         try {
             Document document = new Document(new Rectangle(135, 135));
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("src/main/java/com/example/airport/static/text" + id + ".pdf"));
+            String filename = "src/main/java/com/example/airport/static/text" + id + ".pdf";
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filename));
             document.open();
+            document.addTitle(content);
             document.addSubject(content);
             document.close();
         } catch (Exception e) {
         }
+        return "";
     }
     public String createContent(BoughtTicket ticket) {
 

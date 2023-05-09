@@ -30,25 +30,30 @@ public class MailService {
             throw new RuntimeException(e);
         }
     }
-    public void send(String subject, String text, String receiverEmail, String attachFilePath) throws Exception {
-        Session session = Session.getDefaultInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(properties.getProperty("username"), properties.getProperty("password"));
+    public boolean send(String subject, String text, String receiverEmail, String attachFilePath) {
+        try{
+            Session session = Session.getDefaultInstance(properties, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(properties.getProperty("username"), properties.getProperty("password"));
+                }
+            });
+            MimeMessage mimeMessage = new MimeMessage(session);
+            mimeMessage.setFrom(new InternetAddress("no-reply@gmail.com"));
+            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
+            mimeMessage.setSubject(subject);
+            mimeMessage.setText(text);
+            if (attachFilePath != null) {
+                MimeBodyPart attachmentPart = new MimeBodyPart();
+                attachmentPart.attachFile(new File(attachFilePath));
+                Multipart multipart = new MimeMultipart();
+                multipart.addBodyPart(attachmentPart);
+                mimeMessage.setContent(multipart);
             }
-        });
-        MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.setFrom(new InternetAddress("no-reply@gmail.com"));
-        mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
-        mimeMessage.setSubject(subject);
-        mimeMessage.setText(text);
-        if (attachFilePath != null) {
-            MimeBodyPart attachmentPart = new MimeBodyPart();
-            attachmentPart.attachFile(new File(attachFilePath));
-            Multipart multipart = new MimeMultipart();
-            multipart.addBodyPart(attachmentPart);
-            mimeMessage.setContent(multipart);
+            Transport.send(mimeMessage);
+            return true;
+        }catch (Exception e){
+            return false;
         }
-        Transport.send(mimeMessage);
     }
 }
